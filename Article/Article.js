@@ -86,6 +86,8 @@ const data = [
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
+
+  
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -98,6 +100,8 @@ const data = [
 
     <span class='expandButton'></span>
   </div>
+
+  
 
   Hint: You will need to use createElement more than once here!
 
@@ -112,3 +116,61 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articleDiv = document.querySelector(".articles");
+
+data.forEach(content =>{
+  articleDiv.appendChild(createArticle(content));
+});
+
+data.push({
+  title:"me",
+});
+
+console.log(data)
+
+function createArticle(articleInfo){ // function to create the article component
+  
+const article = document.createElement("div");
+const articleTitle = document.createElement("h2");
+const articleDate = document.createElement("p");  // creating the html elements for the component
+const paragraphOne = document.createElement("p");
+const paragraphTwo= document.createElement("p");
+const paragraphThree = document.createElement("p");
+const button = document.createElement("span");
+
+
+// appending elements so they are nested correctly
+
+article.appendChild(articleTitle);
+article.appendChild(articleDate);
+article.appendChild(paragraphOne);
+article.appendChild(paragraphTwo);
+article.appendChild(paragraphThree);
+article.appendChild(button);
+
+// adding css classes to the elements
+
+article.classList.add("article");
+articleDate.classList.add("date");
+button.classList.add("expandButton");
+
+// adding content
+
+articleDate.textContent = articleInfo.date;
+articleTitle.textContent = articleTitle.title;
+paragraphOne.textContent = articleInfo.firstParagraph;
+paragraphTwo.textContent = articleInfo.secondParagraph;
+paragraphThree.textContent = articleInfo.thirdParagraph;
+button.textContent = "Ima button";
+
+button.addEventListener("click",(e)=>{
+  article.classList.toggle("article-open");
+});
+
+
+return article;
+
+};
+
+console.log(articleDiv);
